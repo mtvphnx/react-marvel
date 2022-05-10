@@ -69,6 +69,16 @@ main {
     animation: pulse 1.5s ease-in-out .5s infinite
 }
 
+.spinner {
+    margin: auto;
+}
+
+.error {
+    display: block;
+    height: 230px;
+    margin: auto;
+}
+
 @keyframes pulse {
     0% {
         opacity: 1
