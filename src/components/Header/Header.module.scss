@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  & * {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 33px;
+  }
+}
+
+.logo {
+  & span {
+    color: var(--red);
+  }
+}
+
+.links {
+  display: flex;
+
+  & span {
+    padding: 0 8px;
+    display: inline-block;
+
+    user-select: none;
+  }
+
+  & a.active {
+    color: var(--red);
+  }
+}
