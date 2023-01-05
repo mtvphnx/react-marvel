@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 export const Header = () => {
     return (
         <header className={styles.header}>
-            <a href="/" className={styles.logo}>
+            <a href={`${process.env.PUBLIC_URL}`} className={styles.logo}>
                 <span>Marvel</span> information portal
             </a>
             <div className={styles.links}>
