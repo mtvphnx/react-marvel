@@ -42,7 +42,7 @@ export class Random extends Component {
         return (
             <div className={styles.random}>
                 <div className={styles.item}>
-                    {loading ? <Spinner/> : error ? <Error/> : <RandomHero char={char}/>}
+                    {loading ? <Spinner/> : error ? <Error/> : <View char={char}/>}
                 </div>
                 <div className={styles.item}>
                     <div className={styles.wrapper}>
@@ -60,7 +60,7 @@ export class Random extends Component {
     }
 }
 
-const RandomHero = ({char}) => {
+const View = ({char}) => {
     const {name, description, thumbnail, homepage, wiki} = char;
 
     return (

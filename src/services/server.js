@@ -25,10 +25,12 @@ export default class Server {
     _transformObject = (obj) => {
         return {
             name: obj.name,
+            id: obj.id,
             description: obj.description,
             thumbnail: `${obj.thumbnail.path}.${obj.thumbnail.extension}`,
             homepage: obj.urls[0].url,
-            wiki: obj.urls[1].url
+            wiki: obj.urls[1].url,
+            comics: obj.comics.items
         }
     }
 }

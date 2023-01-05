@@ -1,0 +1,61 @@
+.text {
+  margin-bottom: 30px;
+
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.pic, .wrap div, .body {
+  background-color: #C4C4C4;
+  animation: pulse 1.5s ease-in-out .5s infinite
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1
+  }
+  50% {
+    opacity: .4
+  }
+  100% {
+    opacity: 1
+  }
+}
+
+.top {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.pic {
+  width: 150px;
+  height: 150px;
+  margin-right: 15px;
+  flex-shrink: 0;
+
+  border-radius: 7px;
+}
+
+.wrap {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & div {
+    width: 100%;
+    height: 20px;
+
+    border-radius: 5px;
+  }
+}
+
+.body {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
