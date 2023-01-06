@@ -5,30 +5,50 @@ import {Spinner} from "../Spinner/Spinner";
 import {Error} from "../Error/Error";
 import Info from "../Info/Info";
 import cn from 'classnames';
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 export default class Content extends Component {
     state = {
         chars: [],
         loading: true,
         error: false,
-        current: null
+        current: null,
+        listLoading: false,
+        listLength: 210,
+        endList: false
     }
 
     API = new Server();
 
-    onCharsLoaded = (chars) => {
-        this.setState({chars, loading: false});
+    onCharsLoaded = (newChars) => {
+        if (newChars.length < 9) {
+            this.setState({endList: true});
+        }
+
+        this.setState(({chars, listLength}) => ({
+            chars: [...chars, ...newChars], listLength: listLength + 9, loading: false, listLoading: false
+        }));
     }
 
     onCharsError = () => {
-        this.setState({error: true});
+        this.setState({error: true, loading: false});
+    }
+
+    onUpdateListLoading = () => {
+        this.setState({listLoading: true})
     }
 
     updateList = () => {
+        this.loadList();
+    }
+
+    loadList = () => {
+        this.onUpdateListLoading();
+
         this.API
-            .getAllElements()
-                .then(this.onCharsLoaded)
-                .catch(this.onCharsError);
+            .getAllElements(this.state.listLength)
+            .then(this.onCharsLoaded)
+            .catch(this.onCharsError);
     }
 
     selectHero = (e, id) => {
@@ -42,7 +62,7 @@ export default class Content extends Component {
     }
 
     render() {
-        const {chars, loading, error, current} = this.state;
+        const {chars, loading, error, current, listLoading, endList} = this.state;
         
         const elementsList = chars.map((item) => {
             return (
@@ -65,11 +85,19 @@ export default class Content extends Component {
                     {errorMessage}
                     {content}
                     <div className={styles.load}>
-                        <button className={cn('button', styles.more)}>LOAD MORE</button>
+                        <button
+                            onClick={this.loadList}
+                            disabled={listLoading}
+                            className={cn('button', styles.more)}
+                            style={{'display': endList ? 'none' : 'block'}}>
+                            {listLoading ? 'loading...' : 'LOAD MORE'}
+                        </button>
                     </div>
                 </ul>
                 <div className={styles.current}>
-                    <Info id={current}/>
+                    <ErrorBoundary>
+                        <Info id={current}/>
+                    </ErrorBoundary>
                 </div>
             </div>
         )

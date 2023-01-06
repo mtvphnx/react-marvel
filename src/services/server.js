@@ -1,6 +1,7 @@
 export default class Server {
     _domain = 'https://gateway.marvel.com:443/v1/public/';
-    _params = '?limit=9&offset=210&apikey=eee95986dcd8befa6e61baeb32bd5c1c';
+    _apiKeys = 'apikey=eee95986dcd8befa6e61baeb32bd5c1c';
+    _baseOffset = 210;
 
     getResource = async (url) => {
         let result = await fetch(url);
@@ -12,13 +13,13 @@ export default class Server {
         return await result.json();
     }
 
-    getAllElements = async () => {
-        const result = await this.getResource(`${this._domain}characters${this._params}`);
+    getAllElements = async (offset = this._baseOffset) => {
+        const result = await this.getResource(`${this._domain}characters?limit=9&offset=${offset}&${this._apiKeys}`);
         return result.data.results.map(this._transformObject);
     }
 
     getElement = async (id) => {
-        const result = await this.getResource(`${this._domain}characters/${id}${this._params}`);
+        const result = await this.getResource(`${this._domain}characters/${id}?${this._apiKeys}`);
         return this._transformObject(result.data.results[0]);
     }
 
