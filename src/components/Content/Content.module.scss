@@ -1,7 +1,9 @@
+@import '../../styles/functions';
+
 .content {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 25px;
+  padding-bottom: rem(25px);
 }
 
 .list {
@@ -13,36 +15,36 @@
 }
 
 .element {
-  width: 200px;
-  height: 318px;
-  margin-bottom: 30px;
-  margin-right: 25px;
+  width: rem(200px);
+  height: rem(318px);
+  margin-bottom: rem(30px);
+  margin-right: rem(25px);
 
   background-color: var(--dark);
   cursor: pointer;
   transition: .3s;
-  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(rem(5px) rem(5px) rem(10px) rgba(0, 0, 0, 0.25));
 
   &:hover, &.active {
-    transform: translateY(-10px);
-    filter: drop-shadow(0 5px 5px var(--red));
+    transform: translateY(rem(-10px));
+    filter: drop-shadow(0 rem(5px) rem(5px) var(--red));
   }
 
   & img {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 15px;
+    width: rem(200px);
+    height: rem(200px);
+    margin-bottom: rem(15px);
 
     object-fit: cover;
     object-position: top left;
   }
 
   & .name {
-    padding: 0 13px;
+    padding: 0 rem(13px);
 
     font-weight: 700;
-    font-size: 22px;
-    line-height: 26px;
+    font-size: rem(22px);
+    line-height: rem(26px);
     color: var(--white);
 
     -webkit-line-clamp: 3;
@@ -55,23 +57,23 @@
 
 .current {
   position: sticky;
-  top: 15px;
+  top: rem(15px);
 
-  width: 425px;
+  width: rem(425px);
   flex-shrink: 0;
-  padding: 25px;
+  padding: rem(25px);
   height: 100%;
-  min-height: 545px;
+  min-height: rem(545px);
 
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 rem(20px) rgba(0, 0, 0, 0.25);
 }
 
 .more {
-  width: 170px!important;
+  width: rem(170px)!important;
   margin: 0 auto;
 }
 
 .load {
   width: 100%;
-  padding: 25px 0;
+  padding: rem(25px) 0;
 }

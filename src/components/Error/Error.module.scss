@@ -1,3 +1,5 @@
+@import '../../styles/functions';
+
 .error {
   display: flex;
   align-items: center;
@@ -7,7 +9,7 @@
   width: 100%;
 
   & img {
-    width: 160px;
-    height: 160px;
+    width: rem(160px);
+    height: rem(160px);
   }
 }

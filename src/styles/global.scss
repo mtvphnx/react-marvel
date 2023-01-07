@@ -1,9 +1,25 @@
+@use "sass:math";
+@import 'functions';
+
 :root {
   --black: #000000;
   --red: #9F0013;
   --dark: #232222;
   --white: #FFFFFF;
   --gray: #5C5C5C;
+}
+
+$desktop-figma: 1440;
+$mobile-breakpoint: 768;
+$mobile-figma: 360;
+
+
+html {
+  font-size: math.div(16, $desktop-figma) * 100vw;
+
+  @media (max-width: ($mobile-breakpoint + px)) {
+    font-size: math.div(16, $mobile-figma) * 100vw;
+  }
 }
 
 *,
@@ -15,8 +31,8 @@
   box-sizing: border-box;
 
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: rem(14px);
+  line-height: rem(16px);
   color: var(--black);
 }
 
@@ -62,16 +78,16 @@ input::-webkit-inner-spin-button {
 }
 
 .container {
-  max-width: 1200px;
-  padding: 50px;
+  max-width: rem(1200px);
+  padding: rem(50px);
   margin: 0 auto;
 }
 
 .button {
   position: relative;
 
-  width: 101px;
-  height: 38px;
+  width: rem(101px);
+  height: rem(38px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,8 +96,8 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   border: none;
 
-  font-size: 14px;
-  line-height: 16px;
+  font-size: rem(14px);
+  line-height: rem(16px);
   color: var(--white);
   text-transform: uppercase;
   transition: .3s;
@@ -97,20 +113,20 @@ input::-webkit-inner-spin-button {
     content: '';
 
     display: block;
-    width: 10px;
-    height: 10px;
+    width: rem(10px);
+    height: rem(10px);
 
     background-color: var(--white);
     transform: rotate(45deg);
   }
 
   &:before {
-    left: -5px;
-    top: -5px;
+    left: rem(-5px);
+    top: rem(-5px);
   }
 
   &:after {
-    bottom: -5px;
-    right: -5px;
+    bottom: rem(-5px);
+    right: rem(-5px);
   }
 }

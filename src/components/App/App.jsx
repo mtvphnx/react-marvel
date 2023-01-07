@@ -1,5 +1,4 @@
-import {Header, Hero} from "../../components";
-import Content from "../Content/Content";
+import {Header, Hero, Content} from "../../components";
 
 export const App = () => {
     return (

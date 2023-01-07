@@ -1,9 +1,11 @@
+@import '../../styles/functions';
+
 .text {
-  margin-bottom: 25px;
+  margin-bottom: rem(25px);
   text-align: center;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: rem(18px);
+  line-height: rem(21px);
 }
 
 .boundary {

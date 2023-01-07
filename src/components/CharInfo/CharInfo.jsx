@@ -2,12 +2,10 @@ import {Component} from "react";
 import styles from './CharInfo.module.scss';
 import Server from "../../services/server";
 import cn from "classnames";
-import {Spinner} from "../Spinner/Spinner";
-import {Error} from "../Error/Error";
-import {Skeleton} from "../Skeleton/Skeleton";
+import {Spinner, Error, Skeleton} from "../../components";
 import PropTypes from 'prop-types';
 
-export default class CharInfo extends Component {
+export class CharInfo extends Component {
     state = {
         char: null,
         loading: false,

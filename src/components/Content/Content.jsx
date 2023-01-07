@@ -1,10 +1,8 @@
 import {Component} from "react";
 import styles from './Content.module.scss';
-import CharInfo from "../CharInfo/CharInfo";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-import {CharList} from "../CharList/CharList";
+import {CharInfo, CharList, ErrorBoundary} from '../../components';
 
-export default class Content extends Component {
+export class Content extends Component {
     state = {
         current: null
     }

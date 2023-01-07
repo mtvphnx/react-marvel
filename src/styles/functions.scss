@@ -1,0 +1,8 @@
+@use "sass:math";
+
+@function rem($num) {
+  $strip-unit: math.div($num, $num * 0 + 1);
+  @return math.div($strip-unit, 16) * 1rem;
+}
+
+$mobile: 768px;

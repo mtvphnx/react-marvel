@@ -1,15 +1,17 @@
+@import '../../styles/functions';
+
 .random {
   display: flex;
   flex-shrink: 0;
-  margin-bottom: 50px;
+  margin-bottom: rem(50px);
 }
 
 .item {
   width: 50%;
-  height: 250px;
-  padding: 35px 35px 35px 40px;
+  height: rem(250px);
+  padding: rem(35px) rem(35px) rem(35px) rem(40px);
 
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: rem(5px) rem(5px) rem(20px) rgba(0, 0, 0, 0.25);
 
   &:last-of-type {
     position: relative;
@@ -28,9 +30,9 @@
   position: relative;
 
   flex-shrink: 0;
-  width: 180px;
-  height: 180px;
-  margin-right: 30px;
+  width: rem(180px);
+  height: rem(180px);
+  margin-right: rem(30px);
 
   background-color: var(--gray);
 
@@ -46,14 +48,14 @@
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 265px;
+  width: rem(265px);
 }
 
 .name {
-  margin-bottom: 10px;
+  margin-bottom: rem(10px);
 
   font-weight: 700;
-  font-size: 22px;
+  font-size: rem(22px);
   line-height: 100%;
 
   white-space: nowrap;
@@ -62,11 +64,11 @@
 }
 
 .description {
-  margin-bottom: 13px;
+  margin-bottom: rem(13px);
   flex: 1;
 
-  font-size: 14px;
-  line-height: 16px;
+  font-size: rem(14px);
+  line-height: rem(16px);
 
   -webkit-line-clamp: 6;
   display: -webkit-box;
@@ -79,7 +81,7 @@
 }
 
 .link {
-  margin-right: 30px;
+  margin-right: rem(30px);
 
   &:last-of-type {
     margin-right: 0;
@@ -94,18 +96,18 @@
 
 .title, .subtitle {
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: rem(24px);
+  line-height: rem(28px);
   color: var(--white);
 }
 
 .title {
-  width: 374px;
+  width: rem(374px);
   flex: 1;
 }
 
 .subtitle {
-  margin-bottom: 13px;
+  margin-bottom: rem(13px);
 }
 
 .wrapper {
@@ -116,11 +118,11 @@
 
 .bg {
   position: absolute;
-  right: -35px;
-  bottom: 14px;
+  right: rem(-35px);
+  bottom: rem(14px);
 
-  width: 202.54px;
-  height: 189px;
+  width: rem(202.54px);
+  height: rem(189px);
 
   & img {
     width: 100%;

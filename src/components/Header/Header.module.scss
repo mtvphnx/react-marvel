@@ -1,12 +1,14 @@
+@import '../../styles/functions';
+
 .header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: rem(50px);
 
   & * {
     font-weight: 700;
-    font-size: 28px;
-    line-height: 33px;
+    font-size: rem(28px);
+    line-height: rem(33px);
   }
 }
 
@@ -20,7 +22,7 @@
   display: flex;
 
   & span {
-    padding: 0 8px;
+    padding: 0 rem(8px);
     display: inline-block;
 
     user-select: none;

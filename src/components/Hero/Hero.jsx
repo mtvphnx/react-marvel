@@ -2,11 +2,8 @@ import styles from './Hero.module.scss';
 import Server from '../../services/server';
 import {Component} from "react";
 import cn from 'classnames';
-import {Spinner} from "../Spinner/Spinner";
-import {Error} from "../Error/Error";
+import {Spinner, Error, RandomChar, ErrorBoundary} from "../../components";
 import bg from '../../resources/mjor.png';
-import {RandomChar} from "../RandomChar/RandomChar";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 export class Hero extends Component {
     state = {

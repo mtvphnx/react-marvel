@@ -1,8 +1,7 @@
 import {Component} from "react";
 import styles from "../Content/Content.module.scss";
 import cn from "classnames";
-import {Spinner} from "../Spinner/Spinner";
-import {Error} from "../Error/Error";
+import {Spinner, Error} from "../../components";
 import Server from "../../services/server";
 import PropTypes from "prop-types";
 

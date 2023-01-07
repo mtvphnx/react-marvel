@@ -2,7 +2,7 @@ import {Component} from "react";
 import {Error} from "../Error/Error";
 import styles from './ErrorBoundary.module.scss';
 
-export default class ErrorBoundary extends Component {
+export class ErrorBoundary extends Component {
     state = {
         error: false
     }
