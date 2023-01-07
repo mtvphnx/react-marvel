@@ -1,12 +1,13 @@
 import {Component} from "react";
-import styles from './Info.module.scss';
+import styles from './CharInfo.module.scss';
 import Server from "../../services/server";
 import cn from "classnames";
 import {Spinner} from "../Spinner/Spinner";
 import {Error} from "../Error/Error";
 import {Skeleton} from "../Skeleton/Skeleton";
+import PropTypes from 'prop-types';
 
-export default class Info extends Component {
+export default class CharInfo extends Component {
     state = {
         char: null,
         loading: false,
@@ -61,6 +62,7 @@ export default class Info extends Component {
 const View = ({char}) => {
     const {name, description, thumbnail, homepage, wiki, comics} = char;
 
+    // eslint-disable-next-line
     const comicsList = comics.map((item, index) => {
         if (index < 10) {
             return (
@@ -87,11 +89,15 @@ const View = ({char}) => {
             </div>
             <div className={styles.body}>
                 <div className={styles.description}>{description ? description : 'Description not found'}</div>
-                {comics.length > 0 ? <div className={styles.subtitle}>Comics:</div> : null}
+                <div className={styles.subtitle}>Comics:</div>
                 <ul className={styles.list}>
-                    {comics.length > 0 ? comicsList : null}
+                    {comics.length > 0 ? comicsList : <div className={styles.description}>There is no comics with this character</div>}
                 </ul>
             </div>
         </>
     )
+}
+
+CharInfo.propTypes = {
+    id: PropTypes.number || PropTypes.any
 }

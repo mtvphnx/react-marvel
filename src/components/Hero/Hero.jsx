@@ -1,12 +1,14 @@
-import styles from './Random.module.scss';
+import styles from './Hero.module.scss';
 import Server from '../../services/server';
 import {Component} from "react";
 import cn from 'classnames';
 import {Spinner} from "../Spinner/Spinner";
 import {Error} from "../Error/Error";
 import bg from '../../resources/mjor.png';
+import {RandomChar} from "../RandomChar/RandomChar";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
-export class Random extends Component {
+export class Hero extends Component {
     state = {
         char: {},
         loading: true,
@@ -42,14 +44,14 @@ export class Random extends Component {
         return (
             <div className={styles.random}>
                 <div className={styles.item}>
-                    {loading ? <Spinner/> : error ? <Error/> : <View char={char}/>}
+                    {loading ? <Spinner/> : error ? <Error/> : <ErrorBoundary><RandomChar char={char}/></ErrorBoundary>}
                 </div>
                 <div className={styles.item}>
                     <div className={styles.wrapper}>
                         <div className={styles.title}>Random character for today!
                             Do you want to get to know him better?</div>
                         <div className={styles.subtitle}>Or choose another one</div>
-                        <button onClick={this.updateChar} className={cn('button', styles.button)}>TRY IT</button>
+                        <button onClick={this.updateChar} disabled={loading} className={cn('button', styles.button)}>TRY IT</button>
                         <div className={styles.bg}>
                             <img src={bg} alt="Mjolner"/>
                         </div>
@@ -58,24 +60,4 @@ export class Random extends Component {
             </div>
         )
     }
-}
-
-const View = ({char}) => {
-    const {name, description, thumbnail, homepage, wiki} = char;
-
-    return (
-        <div className={styles.hero}>
-            <div className={styles.thumbnail}>
-                <img src={thumbnail} alt={name}/>
-            </div>
-            <div className={styles.info}>
-                <div className={styles.name}>{name}</div>
-                <div className={styles.description}>{description ? description : 'Description not found'}</div>
-                <div className={styles.func}>
-                    <a href={homepage} className={cn('button', styles.link)} target="_blank" rel="noreferrer">Homepage</a>
-                    <a href={wiki} className={cn('button', styles.link)} target="_blank" rel="noreferrer">Wiki</a>
-                </div>
-            </div>
-        </div>
-    )
 }

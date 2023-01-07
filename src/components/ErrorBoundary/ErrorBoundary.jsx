@@ -15,10 +15,10 @@ export default class ErrorBoundary extends Component {
     render() {
         if (this.state.error) {
             return (
-                <>
+                <div className={styles.boundary}>
                     <h2 className={styles.text}>Something went wrong</h2>
                     <Error/>
-                </>
+                </div>
             )
         }
 

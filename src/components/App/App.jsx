@@ -1,11 +1,11 @@
-import {Header, Random} from "../../components";
+import {Header, Hero} from "../../components";
 import Content from "../Content/Content";
 
 export const App = () => {
     return (
         <div className="container">
             <Header/>
-            <Random/>
+            <Hero/>
             <Content/>
         </div>
     )
