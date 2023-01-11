@@ -7,10 +7,18 @@ export class Content extends Component {
         current: null
     }
 
-    selectHero = (e, id) => {
+    itemsRefs = [];
+
+    setRef = (ref) => {
+        this.itemsRefs.push(ref);
+    }
+
+    selectHero = (id, index) => {
         this.setState({current: id});
-        document.querySelectorAll(`.${styles.active}`).forEach(item => item.classList.remove(`${styles.active}`));
-        e.currentTarget.classList.add(`${styles.active}`);
+
+        this.itemsRefs.forEach(item => item.classList.remove(`${styles.active}`));
+        this.itemsRefs[index].classList.add(`${styles.active}`);
+        this.itemsRefs[index].focus();
     }
 
     render() {
@@ -19,7 +27,7 @@ export class Content extends Component {
         return (
             <div className={styles.content}>
                 <ErrorBoundary>
-                    <CharList handler={this.selectHero}/>
+                    <CharList setRef={this.setRef} handler={this.selectHero}/>
                 </ErrorBoundary>
 
                 <div className={styles.current}>

@@ -56,10 +56,17 @@ export class CharList extends Component {
         const {chars, loading, error, listLoading, endList} = this.state;
         const {handler} = this.props;
 
-        const elementsList = chars.map((item) => {
+        const elementsList = chars.map((item, index) => {
             return (
                 <li key={item.id} className={cn(styles.element, 'element')}
-                    onClick={e => handler(e, item.id)}>
+                    ref={this.props.setRef}
+                    tabIndex={0}
+                    onClick={() => handler(item.id, index)}
+                    onKeyPress={(e) => {
+                        if (e.key === ' ' || e.key === "Enter") {
+                            handler(item.id, index);
+                        }
+                    }}>
                     <img src={item.thumbnail} alt={item.name}/>
                     <div className={styles.name}>{item.name}</div>
                 </li>
@@ -90,5 +97,6 @@ export class CharList extends Component {
 }
 
 CharList.propTypes = {
-    handler: PropTypes.func
+    handler: PropTypes.func,
+    setRef: PropTypes.func
 }
