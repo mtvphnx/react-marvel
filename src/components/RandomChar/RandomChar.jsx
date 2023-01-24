@@ -6,12 +6,13 @@ import PropTypes from "prop-types";
 export class RandomChar extends Component {
 
     render() {
-        const {name, description, thumbnail, homepage, wiki} = this.props.char;
+        const {name, description, thumbnail, homepage, wiki, fit} = this.props.char;
 
         return (
             <div className={styles.hero}>
                 <div className={styles.thumbnail}>
-                    <img src={thumbnail} alt={name}/>
+                    <img src={thumbnail} alt={name}
+                         style={{'objectPosition': fit ? `top ${fit}` : 'top center'}}/>
                 </div>
                 <div className={styles.info}>
                     <div className={styles.name}>{name}</div>

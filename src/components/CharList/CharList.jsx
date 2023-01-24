@@ -58,7 +58,7 @@ export class CharList extends Component {
 
         const elementsList = chars.map((item, index) => {
             return (
-                <li key={item.id} className={cn(styles.element, 'element')}
+                <li key={item.id} className={styles.element}
                     ref={this.props.setRef}
                     tabIndex={0}
                     onClick={() => handler(item.id, index)}
@@ -67,7 +67,8 @@ export class CharList extends Component {
                             handler(item.id, index);
                         }
                     }}>
-                    <img src={item.thumbnail} alt={item.name}/>
+                    <img src={item.thumbnail} alt={item.name}
+                         style={{'objectPosition': item.fit ? `top ${item.fit}` : 'top center'}}/>
                     <div className={styles.name}>{item.name}</div>
                 </li>
             )

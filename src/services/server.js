@@ -31,7 +31,8 @@ export default class Server {
             thumbnail: `${obj.thumbnail.path}.${obj.thumbnail.extension}`,
             homepage: obj.urls[0].url,
             wiki: obj.urls[1].url,
-            comics: obj.comics.items
+            comics: obj.comics.items,
+            fit: (/image_not_available/i.test(obj.thumbnail.path)) ? 'left' : (/4c002e0305708/i.test(obj.thumbnail.path)) ? 'right' : ''
         }
     }
 }

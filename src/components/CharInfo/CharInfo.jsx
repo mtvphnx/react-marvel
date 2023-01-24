@@ -58,7 +58,7 @@ export class CharInfo extends Component {
 }
 
 const View = ({char}) => {
-    const {name, description, thumbnail, homepage, wiki, comics} = char;
+    const {name, description, thumbnail, homepage, wiki, comics, fit} = char;
 
     // eslint-disable-next-line
     const comicsList = comics.map((item, index) => {
@@ -75,7 +75,8 @@ const View = ({char}) => {
         <>
             <div className={styles.top}>
                 <div className={styles.pic}>
-                    <img src={thumbnail} alt={name}/>
+                    <img src={thumbnail} alt={name}
+                         style={{'objectPosition': fit ? `top ${fit}` : 'top center'}}/>
                 </div>
                 <div className={styles.wrap}>
                     <div className={styles.name}>{name}</div>
