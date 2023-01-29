@@ -38,11 +38,6 @@ export const CharInfo = (props) => {
     useEffect(() => {
         updateChar();
         // eslint-disable-next-line
-    }, []);
-
-    useEffect(() => {
-        updateChar();
-        // eslint-disable-next-line
     }, [props.id])
 
     return (
