@@ -1,60 +1,58 @@
-import {Component} from "react";
+import {useState, useEffect} from "react";
 import styles from './CharInfo.module.scss';
 import Server from "../../services/server";
 import cn from "classnames";
 import {Spinner, Error, Skeleton} from "../../components";
 import PropTypes from 'prop-types';
 
-export class CharInfo extends Component {
-    state = {
-        char: null,
-        loading: false,
-        error: false
-    }
-    API = new Server();
+export const CharInfo = (props) => {
+    const [char, setChar] = useState(null),
+        [loading, setLoading] = useState(false),
+        [error, setError] = useState(false);
 
-    onCharLoaded = (char) => {
-        this.setState({char, loading: false});
-    }
+    const API = new Server();
 
-    onErrorLoader = () => {
-        this.setState({loading: false, error: true});
+    const onCharLoaded = (char) => {
+        setChar(char);
+        setLoading(false);
     }
 
-    updateChar = () => {
-        const {id} = this.props;
+    const onErrorLoader = () => {
+        setLoading(false);
+        setError(true);
+    }
+
+    const updateChar = () => {
+        const {id} = props;
         if (!id) return;
 
-        this.setState({loading: true, error: false});
+        setLoading(true);
+        setError(false);
 
-        this.API
+        API
             .getElement(id)
-            .then(result => this.onCharLoaded(result))
-            .catch(this.onErrorLoader);
+            .then(result => onCharLoaded(result))
+            .catch(onErrorLoader);
     }
 
-    componentDidMount() {
-        this.updateChar();
-    }
+    useEffect(() => {
+        updateChar();
+        // eslint-disable-next-line
+    }, []);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.id !== this.props.id) {
-            this.updateChar();
-        }
-    }
+    useEffect(() => {
+        updateChar();
+        // eslint-disable-next-line
+    }, [props.id])
 
-    render() {
-        const {char, loading, error} = this.state;
-
-        return (
-            <div className={styles.wrapper}>
-                {char || loading || error ? null : <Skeleton/>}
-                {loading ? <Spinner/> : null}
-                {error ? <Error/> : null}
-                {!loading && !error && char ? <View char={char}/> : null}
-            </div>
-        )
-    }
+    return (
+        <div className={styles.wrapper}>
+            {char || loading || error ? null : <Skeleton/>}
+            {loading ? <Spinner/> : null}
+            {error ? <Error/> : null}
+            {!loading && !error && char ? <View char={char}/> : null}
+        </div>
+    )
 }
 
 const View = ({char}) => {

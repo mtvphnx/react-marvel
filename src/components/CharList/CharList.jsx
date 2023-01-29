@@ -1,100 +1,98 @@
-import {Component} from "react";
+import {useState, useEffect} from "react";
 import styles from "../Content/Content.module.scss";
 import cn from "classnames";
 import {Spinner, Error} from "../../components";
 import Server from "../../services/server";
 import PropTypes from "prop-types";
 
-export class CharList extends Component {
-    state = {
-        chars: [],
-        loading: true,
-        error: false,
-        listLoading: false,
-        listLength: 210,
-        endList: false
-    }
+export const CharList = (props) => {
+    const [chars, setChars] = useState([]),
+        [loading, setLoading] = useState(true),
+        [error, setError] = useState(false),
+        [listLoading, setListLoading] = useState(false),
+        [listLength, setListLength] = useState(210),
+        [endList, setEndList] = useState(false);
 
-    API = new Server();
+    const API = new Server();
 
-    onCharsLoaded = (newChars) => {
+    const onCharsLoaded = (newChars) => {
         if (newChars.length < 9) {
-            this.setState({endList: true});
+            setEndList(true);
         }
 
-        this.setState(({chars, listLength}) => ({
-            chars: [...chars, ...newChars], listLength: listLength + 9, loading: false, listLoading: false
-        }));
+        setChars(chars => [...chars, ...newChars]);
+        setListLength(listLength => listLength + 9);
+        setLoading(false);
+        setListLoading(false);
     }
 
-    onCharsError = () => {
-        this.setState({error: true, loading: false});
+    const onCharsError = () => {
+        setError(true);
+        setLoading(false);
     }
 
-    onUpdateListLoading = () => {
-        this.setState({listLoading: true})
+    const onUpdateListLoading = () => {
+        setListLoading(true);
     }
 
-    updateList = () => {
-        this.loadList();
+    const updateList = () => {
+        loadList();
     }
 
-    loadList = () => {
-        this.onUpdateListLoading();
+    const loadList = () => {
+        onUpdateListLoading();
 
-        this.API
-            .getAllElements(this.state.listLength)
-            .then(this.onCharsLoaded)
-            .catch(this.onCharsError);
+        API
+            .getAllElements(listLength)
+            .then(onCharsLoaded)
+            .catch(onCharsError);
     }
 
-    componentDidMount() {
-        this.updateList();
-    }
+    useEffect(() => {
+        updateList();
+        // eslint-disable-next-line
+    }, []);
 
-    render() {
-        const {chars, loading, error, listLoading, endList} = this.state;
-        const {handler} = this.props;
+    const {handler} = props;
 
-        const elementsList = chars.map((item, index) => {
-            return (
-                <li key={item.id} className={styles.element}
-                    ref={this.props.setRef}
-                    tabIndex={0}
-                    onClick={() => handler(item.id, index)}
-                    onKeyPress={(e) => {
-                        if (e.key === ' ' || e.key === "Enter") {
-                            handler(item.id, index);
-                        }
-                    }}>
-                    <img src={item.thumbnail} alt={item.name}
-                         style={{'objectPosition': item.fit ? `top ${item.fit}` : 'top center'}}/>
-                    <div className={styles.name}>{item.name}</div>
-                </li>
-            )
-        })
-
-        const loadingMessage = loading ? <Spinner/> : null,
-            errorMessage = error ? <Error/> : null,
-            content = !loading && !error ? elementsList : null;
-
+    const elementsList = chars.map((item, index) => {
         return (
-            <ul className={styles.list}>
-                {loadingMessage}
-                {errorMessage}
-                {content}
-                <div className={styles.load}>
-                    <button
-                        onClick={this.loadList}
-                        disabled={listLoading}
-                        className={cn('button', styles.more)}
-                        style={{'display': endList ? 'none' : 'block'}}>
-                        {listLoading ? 'loading...' : 'LOAD MORE'}
-                    </button>
-                </div>
-            </ul>
+            <li key={item.id} className={styles.element}
+                ref={e => props.setRef(e, index)}
+                tabIndex={0}
+                onClick={() => handler(item.id, index)}
+                onKeyPress={(e) => {
+                    if (e.key === ' ' || e.key === "Enter") {
+                        handler(item.id, index);
+                    }
+                }}>
+                <img src={item.thumbnail} alt={item.name}
+                     style={{'objectPosition': item.fit ? `top ${item.fit}` : 'top center'}}/>
+                <div className={styles.name}>{item.name}</div>
+            </li>
         )
-    }
+    })
+
+    const loadingMessage = loading ? <Spinner/> : null,
+        errorMessage = error ? <Error/> : null,
+        content = !loading && !error ? elementsList : null;
+
+    return (
+        <ul className={styles.list}>
+            {loadingMessage}
+            {errorMessage}
+            {content}
+            <div className={styles.load}>
+                <button
+                    onClick={loadList}
+                    disabled={listLoading}
+                    className={cn('button', styles.more)}
+                    style={{'display': endList ? 'none' : 'block'}}>
+                    {listLoading ? 'loading...' : 'LOAD MORE'}
+                </button>
+            </div>
+        </ul>
+    )
 }
 
 CharList.propTypes = {

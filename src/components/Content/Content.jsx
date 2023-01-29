@@ -1,41 +1,35 @@
-import {Component} from "react";
+import {useRef, useState} from "react";
 import styles from './Content.module.scss';
 import {CharInfo, CharList, ErrorBoundary} from '../../components';
 
-export class Content extends Component {
-    state = {
-        current: null
+export const Content = () => {
+    const [current, setCurrent] = useState(null);
+
+    const itemsRefs = useRef([]);
+
+    const generateRefs = (item, index) => {
+        itemsRefs.current[index] = item;
     }
 
-    itemsRefs = [];
+    const selectHero = (id, index) => {
+        setCurrent(id);
 
-    setRef = (ref) => {
-        this.itemsRefs.push(ref);
+        itemsRefs.current.forEach(item => item.classList.remove(`${styles.active}`));
+        itemsRefs.current[index].classList.add(`${styles.active}`);
+        itemsRefs.current[index].focus();
     }
 
-    selectHero = (id, index) => {
-        this.setState({current: id});
+    return (
+        <div className={styles.content}>
+            <ErrorBoundary>
+                <CharList setRef={generateRefs} handler={selectHero}/>
+            </ErrorBoundary>
 
-        this.itemsRefs.forEach(item => item.classList.remove(`${styles.active}`));
-        this.itemsRefs[index].classList.add(`${styles.active}`);
-        this.itemsRefs[index].focus();
-    }
-
-    render() {
-        const {current} = this.state;
-
-        return (
-            <div className={styles.content}>
+            <div className={styles.current}>
                 <ErrorBoundary>
-                    <CharList setRef={this.setRef} handler={this.selectHero}/>
+                    <CharInfo id={current}/>
                 </ErrorBoundary>
-
-                <div className={styles.current}>
-                    <ErrorBoundary>
-                        <CharInfo id={current}/>
-                    </ErrorBoundary>
-                </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
