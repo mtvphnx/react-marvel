@@ -70,10 +70,10 @@ export const CharList = (props) => {
             <div className={styles.load}>
                 <button
                     onClick={loadList}
-                    disabled={listLoading}
+                    disabled={loading}
                     className={cn('button', styles.more)}
                     style={{'display': endList ? 'none' : 'block'}}>
-                    {listLoading ? 'loading...' : 'LOAD MORE'}
+                    {loading ? 'loading...' : 'LOAD MORE'}
                 </button>
             </div>
         </ul>
