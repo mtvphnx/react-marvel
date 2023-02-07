@@ -1,29 +1,23 @@
-export default class Server {
-    _domain = 'https://gateway.marvel.com:443/v1/public/';
-    _apiKeys = 'apikey=eee95986dcd8befa6e61baeb32bd5c1c';
-    _baseOffset = 210;
+import {useHttp} from "../hooks/http.hook";
 
-    getResource = async (url) => {
-        let result = await fetch(url);
+const useServer = () => {
+    const {loading, request, error, clearError} = useHttp();
 
-        if (!result.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${result.status}`)
-        }
+    const _domain = 'https://gateway.marvel.com:443/v1/public/',
+        _apiKeys = 'apikey=eee95986dcd8befa6e61baeb32bd5c1c',
+        _baseOffset = 210;
 
-        return await result.json();
+    const getAllElements = async (offset = _baseOffset) => {
+        const result = await request(`${_domain}characters?limit=9&offset=${offset}&${_apiKeys}`);
+        return result.data.results.map(_transformObject);
     }
 
-    getAllElements = async (offset = this._baseOffset) => {
-        const result = await this.getResource(`${this._domain}characters?limit=9&offset=${offset}&${this._apiKeys}`);
-        return result.data.results.map(this._transformObject);
+    const getElement = async (id) => {
+        const result = await request(`${_domain}characters/${id}?${_apiKeys}`);
+        return _transformObject(result.data.results[0]);
     }
 
-    getElement = async (id) => {
-        const result = await this.getResource(`${this._domain}characters/${id}?${this._apiKeys}`);
-        return this._transformObject(result.data.results[0]);
-    }
-
-    _transformObject = (obj) => {
+    const _transformObject = (obj) => {
         return {
             name: obj.name,
             id: obj.id,
@@ -35,4 +29,8 @@ export default class Server {
             fit: (/image_not_available/i.test(obj.thumbnail.path)) ? 'left' : (/4c002e0305708/i.test(obj.thumbnail.path)) ? 'right' : ''
         }
     }
+
+    return {loading, error, getElement, getAllElements, clearError};
 }
+
+export default useServer;

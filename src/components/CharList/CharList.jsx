@@ -2,18 +2,16 @@ import {useState, useEffect} from "react";
 import styles from "../Content/Content.module.scss";
 import cn from "classnames";
 import {Spinner, Error} from "../../components";
-import Server from "../../services/server";
+import useServer from "../../services/server";
 import PropTypes from "prop-types";
 
 export const CharList = (props) => {
     const [chars, setChars] = useState([]),
-        [loading, setLoading] = useState(true),
-        [error, setError] = useState(false),
         [listLoading, setListLoading] = useState(false),
         [listLength, setListLength] = useState(210),
         [endList, setEndList] = useState(false);
 
-    const API = new Server();
+    const {loading, error, getAllElements} = useServer();
 
     const onCharsLoaded = (newChars) => {
         if (newChars.length < 9) {
@@ -22,30 +20,18 @@ export const CharList = (props) => {
 
         setChars(chars => [...chars, ...newChars]);
         setListLength(listLength => listLength + 9);
-        setLoading(false);
         setListLoading(false);
     }
 
-    const onCharsError = () => {
-        setError(true);
-        setLoading(false);
-    }
-
-    const onUpdateListLoading = () => {
-        setListLoading(true);
-    }
-
     const updateList = () => {
-        loadList();
+        loadList(true);
     }
 
-    const loadList = () => {
-        onUpdateListLoading();
+    const loadList = (initial) => {
+        initial ? setListLoading(false): setListLoading(true);
 
-        API
-            .getAllElements(listLength)
-            .then(onCharsLoaded)
-            .catch(onCharsError);
+        getAllElements(listLength)
+            .then(onCharsLoaded);
     }
 
     useEffect(() => {
@@ -73,15 +59,14 @@ export const CharList = (props) => {
         )
     })
 
-    const loadingMessage = loading ? <Spinner/> : null,
-        errorMessage = error ? <Error/> : null,
-        content = !loading && !error ? elementsList : null;
+    const loadingMessage = loading && !listLoading ? <Spinner/> : null,
+        errorMessage = error ? <Error/> : null;
 
     return (
         <ul className={styles.list}>
             {loadingMessage}
             {errorMessage}
-            {content}
+            {elementsList}
             <div className={styles.load}>
                 <button
                     onClick={loadList}

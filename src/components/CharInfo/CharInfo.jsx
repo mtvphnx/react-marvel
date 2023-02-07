@@ -1,38 +1,24 @@
 import {useState, useEffect} from "react";
 import styles from './CharInfo.module.scss';
-import Server from "../../services/server";
+import useServer from "../../services/server";
 import cn from "classnames";
 import {Spinner, Error, Skeleton} from "../../components";
 import PropTypes from 'prop-types';
 
 export const CharInfo = (props) => {
-    const [char, setChar] = useState(null),
-        [loading, setLoading] = useState(false),
-        [error, setError] = useState(false);
+    const [char, setChar] = useState(null);
 
-    const API = new Server();
+    const {loading, error, getElement, clearError} = useServer();
 
-    const onCharLoaded = (char) => {
-        setChar(char);
-        setLoading(false);
-    }
-
-    const onErrorLoader = () => {
-        setLoading(false);
-        setError(true);
-    }
+    const onCharLoaded = (char) => setChar(char);
 
     const updateChar = () => {
         const {id} = props;
         if (!id) return;
 
-        setLoading(true);
-        setError(false);
-
-        API
-            .getElement(id)
-            .then(result => onCharLoaded(result))
-            .catch(onErrorLoader);
+        clearError();
+        getElement(id)
+            .then(result => onCharLoaded(result));
     }
 
     useEffect(() => {

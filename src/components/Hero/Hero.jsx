@@ -1,35 +1,20 @@
 import styles from './Hero.module.scss';
-import Server from '../../services/server';
+import useServer from '../../services/server';
 import {useState, useEffect} from "react";
 import cn from 'classnames';
 import {Spinner, Error, RandomChar, ErrorBoundary} from "../../components";
 import bg from '../../resources/mjor.png';
 
 export const Hero = () => {
-    const [char, setChar] = useState({}),
-        [loading, setLoading] = useState(true),
-        [error, setError] = useState(false);
+    const [char, setChar] = useState({});
+    const {loading, error, getElement, clearError} = useServer();
 
-    const API = new Server();
-
-    const onCharLoaded = (char) => {
-        setChar(char);
-        setLoading(false);
-    }
-
-    const onErrorLoader = () => {
-        setLoading(false);
-        setError(true);
-    }
+    const onCharLoaded = char => setChar(char);
 
     const updateChar = () => {
-        setLoading(true);
-        setError(false);
-
-        API
-            .getElement(Math.floor(Math.random() * (1011400 - 1011000) + 1011000))
-            .then(result => onCharLoaded(result))
-            .catch(onErrorLoader);
+        clearError();
+        getElement(Math.floor(Math.random() * (1011400 - 1011000) + 1011000))
+            .then(result => onCharLoaded(result));
     }
 
     useEffect(() => {
