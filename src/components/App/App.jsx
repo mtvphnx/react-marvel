@@ -8,9 +8,9 @@ export const App = () => {
             <div className="container">
                 <Header/>
                 <Routes>
-                    <Route path={process.env.PUBLIC_URL} element={<MainPage/>}/>
-                    <Route path={process.env.PUBLIC_URL + '/comics'} element={<ComicsPage/>}/>
-                    <Route path="*" element={<ErrorPage/>}/>
+                    <Route path={`${process.env.PUBLIC_URL}/`} element={<MainPage/>}/>
+                    <Route path={`${process.env.PUBLIC_URL}/comics`} element={<ComicsPage/>}/>
+                    <Route path={process.env.PUBLIC_URL + '/*'} element={<ErrorPage/>}/>
                 </Routes>
             </div>
         </Router>
