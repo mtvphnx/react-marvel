@@ -1,15 +1,16 @@
+import {Link, NavLink} from 'react-router-dom';
 import styles from './Header.module.scss';
 
 export const Header = () => {
     return (
         <header className={styles.header}>
-            <a href={`${process.env.PUBLIC_URL}`} className={styles.logo}>
+            <Link to={process.env.PUBLIC_URL} className={styles.logo}>
                 <span>Marvel</span> information portal
-            </a>
+            </Link>
             <div className={styles.links}>
-                <a href="/" className={styles.active}>Characters</a>
+                <NavLink end to={process.env.PUBLIC_URL} className={({isActive}) => isActive ? styles.active : ''}>Characters</NavLink>
                 <span>/</span>
-                <a href="/">Comics</a>
+                <NavLink end to={process.env.PUBLIC_URL + '/comics'} className={({isActive}) => isActive ? styles.active : ''}>Comics</NavLink>
             </div>
         </header>
     )

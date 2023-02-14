@@ -9,3 +9,4 @@ export * from './Hero/Hero';
 export * from './RandomChar/RandomChar';
 export * from './Skeleton/Skeleton';
 export * from './Spinner/Spinner';
+export * from './Banner/Banner';

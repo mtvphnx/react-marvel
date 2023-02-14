@@ -1,0 +1,15 @@
+@import '../../styles/functions';
+
+.banner {
+  margin-bottom: rem(45px);
+  width: rem(1100px);
+  height: rem(100px);
+
+  background: #232222;
+
+  & h1 {
+    line-height: 100%;
+    font-size: rem(40px);
+    color: #ffffff;
+  }
+}
