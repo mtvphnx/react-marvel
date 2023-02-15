@@ -8,10 +8,10 @@ import PropTypes from "prop-types";
 export const CharList = (props) => {
     const [chars, setChars] = useState([]),
         [listLoading, setListLoading] = useState(false),
-        [listLength, setListLength] = useState(210),
+        [offset, setOffset] = useState(210),
         [endList, setEndList] = useState(false);
 
-    const {loading, error, getAllElements} = useServer();
+    const {loading, error, getAllCharacters, clearError} = useServer();
 
     const onCharsLoaded = (newChars) => {
         if (newChars.length < 9) {
@@ -19,7 +19,7 @@ export const CharList = (props) => {
         }
 
         setChars(chars => [...chars, ...newChars]);
-        setListLength(listLength => listLength + 9);
+        setOffset(offset => offset + 9);
         setListLoading(false);
     }
 
@@ -28,9 +28,10 @@ export const CharList = (props) => {
     }
 
     const loadList = (initial) => {
+        clearError();
         initial ? setListLoading(false): setListLoading(true);
 
-        getAllElements(listLength)
+        getAllCharacters(offset)
             .then(onCharsLoaded);
     }
 

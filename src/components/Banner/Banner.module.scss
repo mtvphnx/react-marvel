@@ -4,12 +4,37 @@
   margin-bottom: rem(45px);
   width: rem(1100px);
   height: rem(100px);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 rem(25px) 0 rem(45px);
 
-  background: #232222;
+  background: var(--dark);
+}
 
-  & h1 {
-    line-height: 100%;
-    font-size: rem(40px);
-    color: #ffffff;
+.text {
+  font-weight: 700;
+  font-size: rem(24px);
+  line-height: rem(28px);
+  color: var(--white);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+
+  & img {
+    margin-right: rem(83px);
+    width: rem(152px);
+    height: rem(100px);
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+
+  & img {
+    width: rem(133px);
+    height: rem(100px);
   }
 }

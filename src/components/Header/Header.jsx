@@ -10,7 +10,7 @@ export const Header = () => {
             <div className={styles.links}>
                 <NavLink end to={`${process.env.PUBLIC_URL}/`} className={({isActive}) => isActive ? styles.active : ''}>Characters</NavLink>
                 <span>/</span>
-                <NavLink end to={`${process.env.PUBLIC_URL}/comics`} className={({isActive}) => isActive ? styles.active : ''}>Comics</NavLink>
+                <NavLink to={`${process.env.PUBLIC_URL}/comics`} className={({isActive}) => isActive ? styles.active : ''}>Comics</NavLink>
             </div>
         </header>
     )

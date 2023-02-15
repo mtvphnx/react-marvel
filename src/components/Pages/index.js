@@ -1,3 +1,4 @@
-export * from './ComicsPage';
-export * from './MainPage';
-export * from './ErrorPage';
+export * from './Comics/Comics';
+export * from './Main/Main';
+export * from './Error/Error';
+export * from './SingleComic/SingleComic';

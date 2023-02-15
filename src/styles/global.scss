@@ -77,6 +77,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 .container {
   max-width: rem(1200px);
   padding: rem(50px);

@@ -13,7 +13,7 @@ export const RandomChar = (props) => {
             </div>
             <div className={styles.info}>
                 <div className={styles.name}>{name}</div>
-                <div className={styles.description}>{description ? description : 'Description not found'}</div>
+                <div className={styles.description}>{description}</div>
                 <div className={styles.func}>
                     <a href={homepage} className={cn('button', styles.link)} target="_blank" rel="noreferrer">Homepage</a>
                     <a href={wiki} className={cn('button', styles.link)} target="_blank" rel="noreferrer">Wiki</a>

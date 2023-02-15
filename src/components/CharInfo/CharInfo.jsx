@@ -3,12 +3,13 @@ import styles from './CharInfo.module.scss';
 import useServer from "../../services/server";
 import cn from "classnames";
 import {Spinner, Error, Skeleton} from "../../components";
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export const CharInfo = (props) => {
     const [char, setChar] = useState(null);
 
-    const {loading, error, getElement, clearError} = useServer();
+    const {loading, error, getCharacter, clearError} = useServer();
 
     const onCharLoaded = (char) => setChar(char);
 
@@ -17,7 +18,7 @@ export const CharInfo = (props) => {
         if (!id) return;
 
         clearError();
-        getElement(id)
+        getCharacter(id)
             .then(result => onCharLoaded(result));
     }
 
@@ -44,7 +45,7 @@ const View = ({char}) => {
         if (index < 10) {
             return (
                 <li key={index} className={styles.item}>
-                    <a href={item.resourceURI} target="_blank" rel="noreferrer">{item.name}</a>
+                    <Link to={item.resourceURI.replace('http://gateway.marvel.com/v1/public/comics', `${process.env.PUBLIC_URL}/comics`)}>{item.name}</Link>
                 </li>
             )
         }
@@ -66,7 +67,7 @@ const View = ({char}) => {
                 </div>
             </div>
             <div className={styles.body}>
-                <div className={styles.description}>{description ? description : 'Description not found'}</div>
+                <div className={styles.description}>{description}</div>
                 <div className={styles.subtitle}>Comics:</div>
                 <ul className={styles.list}>
                     {comics.length > 0 ? comicsList : <div className={styles.description}>There is no comics with this character</div>}

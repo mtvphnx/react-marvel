@@ -7,13 +7,13 @@ import bg from '../../resources/mjor.png';
 
 export const Hero = () => {
     const [char, setChar] = useState({});
-    const {loading, error, getElement, clearError} = useServer();
+    const {loading, error, getCharacter, clearError} = useServer();
 
     const onCharLoaded = char => setChar(char);
 
     const updateChar = () => {
         clearError();
-        getElement(Math.floor(Math.random() * (1011400 - 1011000) + 1011000))
+        getCharacter(Math.floor(Math.random() * (1011400 - 1011000) + 1011000))
             .then(result => onCharLoaded(result));
     }
 
