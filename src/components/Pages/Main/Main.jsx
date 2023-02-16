@@ -1,6 +1,6 @@
 import {Hero, Content} from "../../../components";
 
-export const Main = () => {
+const Main = () => {
     return (
         <>
             <Hero/>
@@ -8,3 +8,5 @@ export const Main = () => {
         </>
     )
 }
+
+export default Main;

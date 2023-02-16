@@ -1,6 +1,6 @@
 import {Banner, ComicsList} from "../../../components";
 
-export const Comics = () => {
+const Comics = () => {
     return (
         <>
             <Banner/>
@@ -8,3 +8,5 @@ export const Comics = () => {
         </>
     )
 }
+
+export default Comics;

@@ -4,7 +4,7 @@ import {Link, useParams} from 'react-router-dom';
 import useServer from "../../../services/server";
 import {useEffect, useState} from "react";
 
-export const SingleComic = () => {
+const SingleComic = () => {
     const [comic, setComic] = useState({});
     const {loading, error, getComic, clearError} = useServer();
 
@@ -54,3 +54,5 @@ const View = ({comic}) => {
         </div>
     )
 }
+
+export default SingleComic;
