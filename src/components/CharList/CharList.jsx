@@ -74,7 +74,7 @@ export const CharList = (props) => {
                     disabled={loading}
                     className={cn('button', styles.more)}
                     style={{'display': endList ? 'none' : 'block'}}>
-                    {loading ? 'loading...' : 'LOAD MORE'}
+                    {loading ? 'LOADING...' : 'LOAD MORE'}
                 </button>
             </div>
         </ul>

@@ -18,7 +18,7 @@ const useServer = () => {
 
     const getAllComics = async (offset = 0) => {
         const result = await request(
-            `${_domain}comics?orderBy=-focDate&limit=8&offset=${offset}&${_apiKey}`
+            `${_domain}comics?orderBy=focDate&limit=8&offset=${offset}&${_apiKey}`
         );
         return result.data.results.map(_transformComics);
     };
