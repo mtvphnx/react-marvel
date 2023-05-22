@@ -1,5 +1,5 @@
 import styles from './SingleComic.module.scss';
-import {Banner, Spinner, Returner, Error} from "../../../components";
+import {Spinner, Returner, Error} from "../../../components";
 import {Link, useParams} from 'react-router-dom';
 import useServer from "../../../services/server";
 import {useEffect, useState} from "react";
@@ -25,7 +25,6 @@ const SingleComic = () => {
 
     return (
         <>
-            <Banner/>
             {loading ? <Spinner/> : null}
             {error ? <><Returner prev="comics"/><Error/></> : null}
             {!loading && !error && comic ? <View comic={comic}/> : null}

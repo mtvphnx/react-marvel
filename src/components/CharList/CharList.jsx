@@ -47,20 +47,15 @@ export const CharList = (props) => {
             <li key={item.id} className={styles.element}
                 ref={e => props.setRef(e, index)}
                 tabIndex={0}
-                onClick={() => handler(item.id, index)}
-                onKeyPress={(e) => {
-                    if (e.key === ' ' || e.key === "Enter") {
-                        handler(item.id, index);
-                    }
-                }}>
+                onClick={() => handler(item.id, index)}>
                 <img src={item.thumbnail} alt={item.name}
                      style={{'objectPosition': item.fit ? `top ${item.fit}` : 'top center'}}/>
                 <div className={styles.name}>{item.name}</div>
             </li>
         )
-    })
+    });
 
-    const loadingMessage = loading && !listLoading ? <Spinner/> : null,
+    const loadingMessage = loading && chars.length === 0 ? <Spinner/> : null,
         errorMessage = error ? <Error/> : null;
 
     return (

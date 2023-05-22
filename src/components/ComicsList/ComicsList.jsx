@@ -50,7 +50,7 @@ export const ComicsList = () => {
     )
   })
 
-  const loadingMessage = loading && !listLoading ? <Spinner/> : null,
+  const loadingMessage = loading && comics.length === 0 ? <Spinner/> : null,
       errorMessage = error ? <Error/> : null;
 
 
@@ -69,7 +69,7 @@ export const ComicsList = () => {
               disabled={loading}
               className={cn('button', styles.more)}
               style={{'display': endList ? 'none' : 'block'}}>
-            {loading ? 'loading...' : 'LOAD MORE'}
+            {loading ? 'LOADING...' : 'LOAD MORE'}
           </button>
         </div>
       </ul>
