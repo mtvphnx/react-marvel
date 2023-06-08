@@ -7,7 +7,6 @@ import useServer from "../../services/server";
 
 export const ComicsList = () => {
   const [comics, setComics] = useState([]),
-      [listLoading, setListLoading] = useState(false),
       [offset, setOffset] = useState(0),
       [endList, setEndList] = useState(false);
 
@@ -20,16 +19,14 @@ export const ComicsList = () => {
 
     setComics(comics => [...comics, ...newComics]);
     setOffset(offset => offset + 8);
-    setListLoading(false);
   }
 
   const updateList = () => {
-    loadList(true);
+    loadList();
   }
 
   const loadList = (initial) => {
     clearError();
-    initial ? setListLoading(false): setListLoading(true);
 
     getAllComics(offset)
         .then(onComicsLoaded);
