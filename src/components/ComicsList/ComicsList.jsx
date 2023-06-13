@@ -7,7 +7,7 @@ import useServer from "../../services/server";
 
 export const ComicsList = () => {
   const [comics, setComics] = useState([]),
-      [offset, setOffset] = useState(0),
+      [offset, setOffset] = useState(212),
       [endList, setEndList] = useState(false);
 
   const {loading, error, getAllComics, clearError} = useServer();
@@ -39,7 +39,7 @@ export const ComicsList = () => {
 
   const elementsList = comics.map((item, index) => {
     return (
-        <Link to={`${process.env.PUBLIC_URL}/comics/${item.id}`} key={index} className={styles.element} tabIndex={0}>
+        <Link to={`/comics/${item.id}`} key={index} className={styles.element} tabIndex={0}>
           <img src={item.thumbnail} alt={item.title}/>
             <div className={styles.name}>{item.title}</div>
             <div className={styles.price}>{item.price}</div>

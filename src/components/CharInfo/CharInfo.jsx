@@ -45,7 +45,7 @@ const View = ({char}) => {
         if (index < 10) {
             return (
                 <li key={index} className={styles.item}>
-                    <Link to={item.resourceURI.replace('http://gateway.marvel.com/v1/public/comics', `${process.env.PUBLIC_URL}/comics`)}>{item.name}</Link>
+                    <Link to={item.resourceURI.replace('http://gateway.marvel.com/v1/public/comics', `comics`)}>{item.name}</Link>
                 </li>
             )
         }

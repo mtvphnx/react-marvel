@@ -49,7 +49,7 @@ const View = ({comic}) => {
                 <div className={styles.lang}>Language: {language}</div>
                 <div className={styles.price}>{price}</div>
             </div>
-            <Link to={`${process.env.PUBLIC_URL}/comics`} className={styles.breadcrumb}>Back to all</Link>
+            <Link to={`/comics`} className={styles.breadcrumb}>Back to all</Link>
         </div>
     )
 }

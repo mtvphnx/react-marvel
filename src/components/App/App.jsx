@@ -15,10 +15,10 @@ export const App = () => {
                 <Header/>
                 <Suspense fallback={<Spinner/>}>
                     <Routes>
-                        <Route path={`${process.env.PUBLIC_URL}/`} element={<Main/>}/>
-                        <Route path={`${process.env.PUBLIC_URL}/comics`} element={<Comics/>}/>
-                        <Route path={`${process.env.PUBLIC_URL}/comics/:comicId`} element={<SingleComic/>}/>
-                        <Route path={`${process.env.PUBLIC_URL}/*`} element={<Error/>}/>
+                        <Route path={`/`} element={<Main/>}/>
+                        <Route path={`comics`} element={<Comics/>}/>
+                        <Route path={`comics/:comicId`} element={<SingleComic/>}/>
+                        <Route path={`*`} element={<Error/>}/>
                     </Routes>
                 </Suspense>
             </div>

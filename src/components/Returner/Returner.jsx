@@ -6,7 +6,7 @@ export const Returner = ({prev = 'main'}) => {
       <div className={styles.wrapper}>
           <div className={styles.text}>
               <span className={styles.span}>Page not found 😔</span>
-              <span className={styles.span}>Return to <Link className={styles.link} to={`${process.env.PUBLIC_URL}/${prev !== 'main' ? prev : ''}`}>{prev}</Link></span>
+              <span className={styles.span}>Return to <Link className={styles.link} to={`/${prev !== 'main' ? prev : ''}`}>{prev}</Link></span>
           </div>
       </div>
   )
