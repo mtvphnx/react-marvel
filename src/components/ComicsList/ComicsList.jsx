@@ -25,7 +25,7 @@ export const ComicsList = () => {
     loadList();
   }
 
-  const loadList = (initial) => {
+  const loadList = () => {
     clearError();
 
     getAllComics(offset)
